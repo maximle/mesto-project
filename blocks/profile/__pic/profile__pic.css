@@ -1,0 +1,10 @@
+.profile__pic {
+  width: 120px;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 600px) {
+  .profile__pic {
+    margin: 0 auto 26px;
+  }
+}

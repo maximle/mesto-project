@@ -1,0 +1,13 @@
+.places__like-button {
+  background: url("../../../images/heart.svg") transparent;
+  border: none;
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  margin: 5px 30px 0 auto;
+}
+
+.places__like-button:hover {
+  opacity: 0.5;
+  transition: .25s;
+}

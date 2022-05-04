@@ -1,0 +1,9 @@
+.places__list-item {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  aspect-ratio: 282 / 361;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
