@@ -9,6 +9,7 @@
   line-height: 17px;
   color: #000000;
   padding: 0;
+  outline: none;
 }
 
 .popup__input:last-of-type {

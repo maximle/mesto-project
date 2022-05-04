@@ -10,6 +10,8 @@
 @media screen and (max-width: 600px) {
   .footer__copyright {
     font-size: 14px;
-    line-height: 17px;
+    line-height: 17px; /* в макете противоречит высота блока footer и размер текста в нем */
   }
 }
+
+

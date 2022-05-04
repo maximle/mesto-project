@@ -10,12 +10,13 @@
 @media screen and (max-width: 750px) {
   .profile__info {
     width: 100%;
-    margin-left: 0;
+    margin-left: auto;
   }
 }
 
 @media screen and (max-width: 600px) {
   .profile__info {
     max-width: 282px;
+    margin-left: auto;
   }
 }
