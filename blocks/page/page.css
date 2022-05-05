@@ -6,13 +6,6 @@
   padding: 45px 0 60px;
 }
 
-/* @media screen and (max-width: 1000px) {
-  .page {
-    padding-left: 19px;
-    padding-right: 19px;
-  }
-} */
-
 @media screen and (max-width: 750px) {
   .page {
     max-width: 620px;
