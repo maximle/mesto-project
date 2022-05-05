@@ -7,6 +7,7 @@
   align-self: center;
   background: transparent url("../../../images/plus-sign.svg") 50% 50% no-repeat;
   background-size: 22px 22px;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {

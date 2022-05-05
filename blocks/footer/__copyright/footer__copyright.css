@@ -5,12 +5,14 @@
   line-height: 22px;
   color: #545454;
   margin: 0;
+  max-width: 600px;
 }
 
 @media screen and (max-width: 600px) {
   .footer__copyright {
     font-size: 14px;
-    line-height: 17px; /* в макете противоречит высота блока footer и размер текста в нем */
+    line-height: 17px;
+    max-width: 282px;
   }
 }
 

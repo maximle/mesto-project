@@ -8,6 +8,7 @@
   margin-left: 18px;
   background: transparent url("../../../images/pencil.svg") 50% 50% no-repeat;
   background-size: 10px 10px;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
