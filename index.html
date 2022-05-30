@@ -27,7 +27,7 @@
     </section>
     <section class="places">
       <ul class="places__list">
-        <li class="place">
+        <!-- <li class="place">
           <img src="images/kirill-pershin-1088404-unsplash.jpg" alt="Сентинский храм" class="place__image">
           <h2 class="place__name">Карачаевск</h2>
           <button type="button" aria-label="like" class="place__like-button"></button>
@@ -56,7 +56,7 @@
           <img src="images/kirill-pershin-1088404-unsplash.jpg" alt="Сентинский храм" class="place__image">
           <h2 class="place__name">Карачаево-Черкессия</h2>
           <button type="button" aria-label="like" class="place__like-button"></button>
-        </li>
+        </li> -->
       </ul>
     </section>
     <footer class="footer">
@@ -67,8 +67,8 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <button type="button" aria-label="Закрыть форму" class="popup__close-button"></button>
         <form name="popup__edit-form" class="popup__form">
-          <input type="text" name="popup__input_type_name" class="popup__input popup__input_type_name" value="Жак-Ив Кусто">
-          <input type="text" name="popup__input_type_calling" class="popup__input popup__input_type_calling" value="Исследователь океана">
+          <input type="text" name="popup__input_type_name" class="popup__input popup__input_type_name">
+          <input type="text" name="popup__input_type_calling" class="popup__input popup__input_type_calling">
           <button type="submit" class="popup__save-button">
             Сохранить
           </button>
@@ -76,6 +76,38 @@
 
       </div>
     </div>
+
+    <div class="popup" id="card-popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <button type="button" aria-label="Закрыть форму" class="popup__close-button"></button>
+        <form name="popup__edit-form" class="popup__form">
+          <input type="text" name="popup__input_type_name" class="popup__input popup__input_type_name" placeholder="Название">
+          <input type="text" name="popup__input_type_calling" class="popup__input popup__input_type_calling" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup__save-button">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup" id="image-popup">
+      <div class="popup__image-container">
+        <img src="" alt="" class="popup__image">
+        <p class="popup__image-caption"></p>
+        <button type="button" aria-label="Закрыть форму" class="popup__close-button"></button>
+      </div>
+
+    </div>
   </main>
+  <template id="place-card">
+    <li class="place">
+      <button type="button" aria-label="delete" class="place__delete-button"></button>
+      <img src="" alt="" class="place__image">
+      <h2 class="place__name"></h2>
+      <button type="button" aria-label="like" class="place__like-button"></button>
+    </li>
+  </template>
+  <script src="script.js"></script>
 </body>
 </html>
