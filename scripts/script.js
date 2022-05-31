@@ -90,15 +90,15 @@ function createCard(cardItem) {
   cardElement.querySelector('.place__like-button').addEventListener('click', (e) => {
     likeCard(e.target);
   });
-  placeImage.addEventListener('click', (e) => {
-    const eTarget = e.target;
-    popupImage.src = eTarget.src;
-    popupImageCaption.textContent = eTarget.closest('.place').querySelector('.place__name').textContent;
+  placeImage.addEventListener('click', () => {
+    popupImage.src = cardItem.link;
+    popupImage.alt = cardItem.name;
+    popupImageCaption.textContent = cardItem.name;
     openPopup(imagePopup);
   });
   console.log();
   return cardElement
-}
+};
 
 // 6. Удаление карточки
 function removeCard(cardDelBtn) {
