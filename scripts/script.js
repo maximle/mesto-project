@@ -135,8 +135,7 @@ function handleCardFormSubmit (e) {
   };
   placesList.prepend(createCard(cardPopupInput));
   closePopup(cardPopup);
-  cardPopupNameInput.value = '';
-  cardPopupLinkInput.value = '';
+  e.target.reset();
 }
 
 popupCardForm.addEventListener('submit', handleCardFormSubmit);
