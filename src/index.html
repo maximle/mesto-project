@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
     <title>Место</title>
 </head>
 <body class="page">
   <header class="header">
-    <img src="images/mesto__logo.svg" alt="логотип Mesto" class="header__logo">
+    <img src="<%=require('./images/mesto__logo.svg')%>" alt="логотип Mesto" class="header__logo">
   </header>
   <main>
     <section class="profile">
-      <img src="images/Jacques-Yves%20Cousteau.jpg" alt="фото Жака Кусто" class="profile__pic">
+      <img src="<%=require('./images/Jacques-Yves-Cousteau.jpg')%>" alt="фото Жака Кусто" class="profile__pic">
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -37,8 +36,15 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <button type="button" aria-label="Закрыть форму" class="popup__close-button"></button>
         <form name="popup__edit-form" class="popup__form">
-          <input type="text" name="popup__input_type_name" class="popup__input popup__input_type_name">
-          <input type="text" name="popup__input_type_calling" class="popup__input popup__input_type_calling">
+          <label class="popup__form-field">
+            <input type="text" name="popup__input_type_name" class="popup__input popup__input_type_name" id="name-input" minlength="2" maxlength="40">
+            <span class="popup__input-error name-input-error"></span>
+          </label>
+          <label class="popup__form-field">
+            <input type="text" name="popup__input_type_calling" class="popup__input popup__input_type_calling" id="calling-input" minlength="2" maxlength="200">
+            <span class="popup__input-error calling-input-error" ></span>
+          </label>
+
           <button type="submit" class="popup__save-button">
             Сохранить
           </button>
@@ -51,9 +57,16 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <button type="button" aria-label="Закрыть форму" class="popup__close-button"></button>
-        <form name="popup__edit-form" class="popup__form">
-          <input type="text" name="popup__input_type_name" class="popup__input popup__input_type_name" placeholder="Название">
-          <input type="text" name="popup__input_type_calling" class="popup__input popup__input_type_calling" placeholder="Ссылка на картинку">
+        <form name="popup__edit-form" class="popup__form" novalidate>
+          <label class="popup__form-field">
+            <input type="text" name="popup__input_type_name" class="popup__input popup__input_type_name" id="name-input"  placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="popup__input-error name-input-error"></span>
+          </label>
+          <label class="popup__form-field">
+            <input type="url" name="popup__input_type_calling" class="popup__input popup__input_type_calling" id="url-input" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error url-input-error" ></span>
+          </label>
+
           <button type="submit" class="popup__save-button">
             Сохранить
           </button>
@@ -78,6 +91,5 @@
       <button type="button" aria-label="like" class="place__like-button"></button>
     </li>
   </template>
-  <script src="scripts/script.js"></script>
 </body>
 </html>
