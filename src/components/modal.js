@@ -1,13 +1,13 @@
 import { placesList, createCard } from "./card";
+import { validationConfig } from './validate.js'
 
 const profileEditBtn = document.querySelector('.profile__edit-button');
-const profileCloseBtn = document.querySelector('.popup__close-button');
 const profilePopup = document.querySelector('.profile-popup');
 const profileName = document.querySelector('.profile__name');
 const profileCalling = document.querySelector('.profile__calling');
 const popupNameInput = document.querySelector('.popup__input_type_name');
 const popupCallingInput = document.querySelector('.popup__input_type_calling');
-
+const cardPopupSaveBtn = document.querySelector('.card-popup').querySelector('.popup__save-button');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -16,6 +16,7 @@ function openPopup(popup) {
 
 function closePopup(closingPopup) {
   closingPopup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
 };
 
 function closePopupByEsc(e) {
@@ -23,7 +24,6 @@ function closePopupByEsc(e) {
     const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
-  document.removeEventListener('keydown', closePopupByEsc);
 }
 
 function handleProfileFormSubmit (e) {
@@ -54,7 +54,8 @@ function handleCardFormSubmit (e) {
   } else {
     e.target.reset();
   }
-
+  cardPopupSaveBtn.disabled = true;
+  cardPopupSaveBtn.classList.add(validationConfig.disabledButtonClass);
 }
 
 
