@@ -12,19 +12,32 @@ profileEditBtn.addEventListener('click', () => {
   openPopup(profilePopup);
 });
 
-const popupCloseButtons = document.querySelectorAll('.popup__close-button');
+// const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
 
-popupCloseButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-  document.addEventListener('keydown', closePopupByEsc);
-  popup.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    }
-  })
-});
+// popupCloseButtons.forEach((button) => {
+//   const popup = button.closest('.popup');
+//   button.addEventListener('click', () => closePopup(popup));
+
+//   popup.addEventListener('click', (e) => {
+//     if (e.target.classList.contains('popup_opened')) {
+//       closePopup(popup);
+//     }
+//   })
+// });
+
+const popups = document.querySelectorAll('.popup')
+
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+          closePopup(popup)
+        }
+    })
+})
 
 
 const profilePopupForm = document.querySelector('.popup__form');
@@ -45,11 +58,6 @@ profileAddBtn.addEventListener('click', () => {
 
 
 popupCardForm.addEventListener('submit', handleCardFormSubmit);
-popupCardForm.addEventListener('keypress', e => {
-  if (e.key === 'Enter') {
-    handleCardFormSubmit(e);
-  }
-});
 
 
 

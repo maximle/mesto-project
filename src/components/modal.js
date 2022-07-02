@@ -11,6 +11,7 @@ const popupCallingInput = document.querySelector('.popup__input_type_calling');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
 };
 
 function closePopup(closingPopup) {
@@ -18,11 +19,11 @@ function closePopup(closingPopup) {
 };
 
 function closePopupByEsc(e) {
-  const popup = document.querySelector('.popup_opened');
-  if (e.key === "Escape" && popup.classList.contains('popup_opened')) {
+  if (e.key === "Escape") {
+    const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
-  document.removeEventListener('click', closePopupByEsc);
+  document.removeEventListener('keydown', closePopupByEsc);
 }
 
 function handleProfileFormSubmit (e) {
