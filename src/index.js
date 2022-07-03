@@ -1,9 +1,11 @@
 import './pages/index.css';
+import { profileEditBtn, profileName, profileCalling } from './components/utils';
 
-import {profileEditBtn, profilePopup, profileName, profileCalling, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit} from './components/modal.js';
+import { profilePopup, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit} from './components/modal.js';
 
-import {initialCards, placesList, createCard} from './components/card.js';
+import {cards, placesList, createCard} from './components/card.js';
 import {} from './components/validate'
+import { getInitialCards, getProfileInfo } from './components/api'
 // 1. Работа модальных окон
 
 profileEditBtn.addEventListener('click', () => {
@@ -11,7 +13,7 @@ profileEditBtn.addEventListener('click', () => {
   popupCallingInput.value = profileCalling.textContent;
   openPopup(profilePopup);
 });
-
+getProfileInfo();
 // const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
 
@@ -45,11 +47,12 @@ profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 // 4. Добавление карточки
-
-for (let i = 0; i < initialCards.length; i++) {
-  const cardElement = createCard(initialCards[i]);
-  placesList.append(cardElement);
-}
+getInitialCards();
+// for (let i = 0; i < cards.length; i++) {
+//   console.log(cards.length);
+//   const cardElement = createCard(cards[i]);
+//   placesList.append(cardElement);
+// }
 
 
 profileAddBtn.addEventListener('click', () => {

@@ -1,10 +1,10 @@
 import { placesList, createCard } from "./card";
-import { validationConfig } from './validate.js'
+import { validationConfig } from './validate.js';
+import { profileEditBtn, profileName, profileCalling } from './utils';
+import { editProfileInfo, addNewCard } from './api'
 
-const profileEditBtn = document.querySelector('.profile__edit-button');
+
 const profilePopup = document.querySelector('.profile-popup');
-const profileName = document.querySelector('.profile__name');
-const profileCalling = document.querySelector('.profile__calling');
 const popupNameInput = document.querySelector('.popup__input_type_name');
 const popupCallingInput = document.querySelector('.popup__input_type_calling');
 const cardPopupSaveBtn = document.querySelector('.card-popup').querySelector('.popup__save-button');
@@ -28,8 +28,9 @@ function closePopupByEsc(e) {
 
 function handleProfileFormSubmit (e) {
   e.preventDefault();
-  profileName.textContent = popupNameInput.value;
-  profileCalling.textContent = popupCallingInput.value;
+  // profileName.textContent = popupNameInput.value;
+  // profileCalling.textContent = popupCallingInput.value;
+  editProfileInfo(popupNameInput.value, popupCallingInput.value);
   closePopup(profilePopup);
 }
 
@@ -47,7 +48,9 @@ function handleCardFormSubmit (e) {
     name: cardPopupNameInput.value,
     link: cardPopupLinkInput.value
   };
-  placesList.prepend(createCard(cardPopupInput));
+  // placesList.prepend(createCard(cardPopupInput));
+  console.log(cardPopupInput);
+  addNewCard(cardPopupInput);
   closePopup(cardPopup);
   if (e.target.classList.contains('popup__input')) {
     e.target.closest('.popup__form').reset();
@@ -59,4 +62,4 @@ function handleCardFormSubmit (e) {
 }
 
 
-export {profileEditBtn, profilePopup, profileName, profileCalling, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit};
+export { profilePopup, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit};
