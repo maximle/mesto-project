@@ -12,7 +12,11 @@
   </header>
   <main>
     <section class="profile">
-      <img src="" alt="фото профиля" class="profile__pic">
+      <div class="profile__pic-container">
+        <img src="" alt="фото профиля" class="profile__pic">
+        <div class="profile__pic-overlay"></div>
+      </div>
+
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name"></h1>
@@ -74,6 +78,23 @@
       </div>
     </div>
 
+    <div class="popup profile-pic-popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <button type="button" aria-label="Закрыть форму" class="popup__close-button"></button>
+        <form name="popup__edit-form" class="popup__form" novalidate>
+          <label class="popup__form-field">
+            <input type="url" name="popup__input_type_calling" class="popup__input popup__input_type_calling" id="url-input" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error url-input-error" ></span>
+          </label>
+
+          <button type="submit" class="popup__save-button" disabled="true">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+
     <div class="popup image-popup">
       <div class="popup__image-container">
         <img src="#" alt="" class="popup__image">
@@ -85,10 +106,14 @@
   </main>
   <template id="place-card">
     <li class="place">
-      <button type="button" aria-label="delete" class="place__delete-button"></button>
+      <!-- <button type="button" aria-label="delete" class="place__delete-button"></button> -->
       <img src="" alt="" class="place__image">
       <h2 class="place__name"></h2>
-      <button type="button" aria-label="like" class="place__like-button"></button>
+      <div class="place__like-container">
+        <button type="button" aria-label="like" class="place__like-button"></button>
+        <span class="place__like-count"></span>
+      </div>
+
     </li>
   </template>
 </body>

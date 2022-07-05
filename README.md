@@ -8,6 +8,8 @@
 
 - Валидация форм
 - Webpack
+- Асинхронные операции в JS, Promise
+- Работа с API сервера
 
 Ссылка на проект в GitHub Pages:
 https://maximle.github.io/mesto-project/

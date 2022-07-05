@@ -1,9 +1,12 @@
 .profile__pic {
+  display: flex;
   width: 120px;
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
+  position: relative;
 }
+
 
 @media screen and (max-width: 600px) {
   .profile__pic {
