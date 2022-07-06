@@ -1,7 +1,7 @@
-import { placesList, createCard } from "./card";
+import { createCard } from "./card";
 import { validationConfig } from './validate.js';
-import { profileEditBtn, profileName, profileCalling } from './utils';
-import { editProfileInfo, addNewCard, editProfilePic } from './api'
+import { profileEditBtn, profileName, profileCalling, profilePic, placesList } from './utils';
+import { editProfileInfo, addNewCard, editProfilePic, handleError } from './api'
 import { profilePicPopupForm } from '../index'
 
 const profilePopup = document.querySelector('.profile-popup');
@@ -40,10 +40,18 @@ function handleProfileFormSubmit (e) {
   e.preventDefault();
   renderSaving(true, e);
   console.log(e.target);
-  // profileName.textContent = popupNameInput.value;
-  // profileCalling.textContent = popupCallingInput.value;
-  editProfileInfo(popupNameInput.value, popupCallingInput.value, e);
-  closePopup(profilePopup);
+  editProfileInfo(popupNameInput.value, popupCallingInput.value, e)
+    .then((profileInfoArr) => {
+      console.log(profileInfoArr);
+      profileName.textContent = profileInfoArr.name;
+      profileCalling.textContent = profileInfoArr.about;
+      profilePic.src = profileInfoArr.avatar;
+      closePopup(profilePopup);
+    })
+    .catch(handleError)
+    .finally (() => {
+      renderSaving(false, e);
+    });
 }
 
 
@@ -52,11 +60,17 @@ const profilePicPopupLinkInput = document.querySelector('.profile-pic-popup .pop
 function handleProfilePicFormSubmit (e) {
   e.preventDefault();
   renderSaving(true, e);
-  // profileName.textContent = popupNameInput.value;
-  // profileCalling.textContent = popupCallingInput.value;
-  editProfilePic(profilePicPopupLinkInput.value, e);
-  closePopup(profilePicPopup);
-  profilePicPopupForm.reset();
+  editProfilePic(profilePicPopupLinkInput.value, e)
+    .then((profilePicAnswer) => {
+      console.log(profilePicAnswer);
+      profilePic.src = profilePicAnswer.avatar;
+      closePopup(profilePicPopup);
+      profilePicPopupForm.reset();
+    })
+    .catch(handleError)
+    .finally (() => {
+      renderSaving(false, e);
+    });
 }
 
 const cardPopup = document.querySelector('.card-popup');
@@ -74,17 +88,25 @@ function handleCardFormSubmit (e) {
     name: cardPopupNameInput.value,
     link: cardPopupLinkInput.value
   };
-  // placesList.prepend(createCard(cardPopupInput));
   console.log(cardPopupInput);
-  addNewCard(cardPopupInput, e);
-  closePopup(cardPopup);
-  if (e.target.classList.contains('popup__input')) {
-    e.target.closest('.popup__form').reset();
-  } else {
-    e.target.reset();
-  }
-  cardPopupSaveBtn.disabled = true;
-  cardPopupSaveBtn.classList.add(validationConfig.disabledButtonClass);
+  addNewCard(cardPopupInput, e)
+    .then((newCardObj) => {
+      console.log(newCardObj);
+      placesList.prepend(createCard(newCardObj, newCardObj.owner._id));
+      closePopup(cardPopup);
+      if (e.target.classList.contains('popup__input')) {
+        e.target.closest('.popup__form').reset();
+      } else {
+        e.target.reset();
+      }
+      cardPopupSaveBtn.disabled = true;
+      cardPopupSaveBtn.classList.add(validationConfig.disabledButtonClass);
+    })
+    .catch(handleError)
+    .finally (() => {
+      renderSaving(false, e);
+    });
+
 }
 
 

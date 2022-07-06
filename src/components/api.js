@@ -11,65 +11,29 @@ const config = {
   }
 }
 
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
+function handleError(err) {
+  console.log(err);
+}
 
 function getProfileInfo() {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((profileInfoArr) => {
-    profileName.textContent = profileInfoArr.name;
-    profileCalling.textContent = profileInfoArr.about;
-    profilePic.src = profileInfoArr.avatar;
-    return profileInfoArr._id;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  .then(checkResponse)
 }
 
 function getInitialCards(ownerId) {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .then((cardsArr) => {
-      cardsArr.forEach(cardsItem => {
-        // cards.push({
-        //   name: cardsItem.name,
-        //   link: cardsItem.link,
-        //   likes: cardsItem.likes.length,
-        //   ownerId: cardsItem.owner._id
-        // })
-        cards.push(cardsItem);
-
-        // console.log(cards.find(item => {
-        //   if (item.owner._id === ownerId) {
-        //     return true
-        //   }
-        // }));
-
-      })
-      console.log(cards);
-
-      for (let i = 0; i < cards.length; i++) {
-        const cardElement = createCard(cards[i], ownerId);
-        placesList.append(cardElement);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    .then(checkResponse)
 }
 
 
@@ -83,24 +47,7 @@ function editProfileInfo(nameInput, callingInput, e) {
       about: callingInput
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((profileInfoArr) => {
-    console.log(profileInfoArr);
-    profileName.textContent = profileInfoArr.name;
-    profileCalling.textContent = profileInfoArr.about;
-    profilePic.src = profileInfoArr.avatar;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally (() => {
-    renderSaving(false, e);
-  });
+  .then(checkResponse)
 }
 
 function editProfilePic(link, e) {
@@ -111,22 +58,7 @@ function editProfilePic(link, e) {
       avatar: link
     })
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((profilePicAnswer) => {
-    console.log(profilePicAnswer);
-    profilePic.src = profilePicAnswer.avatar;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally (() => {
-    renderSaving(false, e);
-  });
+  .then(checkResponse)
 }
 
 function addNewCard(cardData, e) {
@@ -135,22 +67,7 @@ function addNewCard(cardData, e) {
     headers: config.headers,
     body: JSON.stringify(cardData)
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((newCardObj) => {
-    console.log(newCardObj);
-    placesList.prepend(createCard(newCardObj, newCardObj.owner._id));
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  .finally (() => {
-    renderSaving(false, e);
-  });
+  .then(checkResponse)
 }
 
 function deleteCard(cardId, target) {
@@ -158,19 +75,7 @@ function deleteCard(cardId, target) {
     method: 'DELETE',
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((deletedCard) => {
-    console.log(deletedCard);
-    removeCard(target);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  .then(checkResponse)
 }
 
 function likeCardApi(target) {
@@ -178,19 +83,7 @@ function likeCardApi(target) {
     method: 'PUT',
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((likedCard) => {
-    console.log(likedCard);
-    target.querySelector('.place__like-count').textContent = likedCard.likes.length;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  .then(checkResponse)
 }
 
 function removeLikeCardApi(target) {
@@ -198,19 +91,7 @@ function removeLikeCardApi(target) {
     method: 'DELETE',
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((likedCard) => {
-    console.log(likedCard);
-    target.querySelector('.place__like-count').textContent = likedCard.likes.length;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  .then(checkResponse)
 }
 
-export { getInitialCards, getProfileInfo, editProfileInfo, addNewCard, deleteCard, likeCardApi, removeLikeCardApi, editProfilePic }
+export { getInitialCards, getProfileInfo, editProfileInfo, addNewCard, deleteCard, likeCardApi, removeLikeCardApi, editProfilePic, handleError }
