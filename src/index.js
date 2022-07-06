@@ -1,7 +1,7 @@
 import './pages/index.css';
 import { profileEditBtn, placesList, profileName, profileCalling, profilePic, profilePicOverlay } from './components/utils';
 
-import { profilePopup, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit, profilePicPopup, handleProfilePicFormSubmit} from './components/modal.js';
+import { profilePopup, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit, profilePicPopup, profilePicPopupForm, handleProfilePicFormSubmit} from './components/modal.js';
 
 import {cards, createCard, removeCard} from './components/card.js';
 import {} from './components/validate'
@@ -18,36 +18,20 @@ profilePicOverlay.addEventListener('click', () => {
   openPopup(profilePicPopup);
 });
 
-
-// const myOwnerId  = await getProfileInfo()
-//   .then((profileInfoArr) => {
-//     profileName.textContent = profileInfoArr.name;
-//     profileCalling.textContent = profileInfoArr.about;
-//     profilePic.src = profileInfoArr.avatar;
-//     return profileInfoArr._id;
-//   })
-//   .catch(handleError)
-
 Promise.all([getProfileInfo(), getInitialCards()])
-  .then (res => {
-    console.log(res);
-    profileName.textContent = res[0].name;
-    profileCalling.textContent = res[0].about;
-    profilePic.src = res[0].avatar;
-    const myOwnerId = res[0]._id;
-    res[1].forEach(cardsItem => {
-      cards.push(cardsItem);
-    })
-    console.log(cards);
+  .then (([profileInfo, cardsArr]) => {
+    console.log(profileInfo, cardsArr)
+    profileName.textContent = profileInfo.name;
+    profileCalling.textContent = profileInfo.about;
+    profilePic.src = profileInfo.avatar;
+    const myOwnerId = profileInfo._id;
 
-    for (let i = 0; i < cards.length; i++) {
-      const cardElement = createCard(cards[i], myOwnerId);
+    for (let i = 0; i < cardsArr.length; i++) {
+      const cardElement = createCard(cardsArr[i], myOwnerId);
       placesList.append(cardElement);
     }
   })
-
-
-
+  .catch(handleError);
 
 const popups = document.querySelectorAll('.popup')
 
@@ -66,8 +50,33 @@ popups.forEach((popup) => {
 const profilePopupForm = document.querySelector('.popup__form');
 profilePopupForm.addEventListener('submit', handleProfileFormSubmit);
 
-const profilePicPopupForm = document.querySelector('.profile-pic-popup .popup__form');
 profilePicPopupForm.addEventListener('submit', handleProfilePicFormSubmit);
+
+
+
+
+profileAddBtn.addEventListener('click', () => {
+  openPopup(cardPopup);
+});
+
+
+popupCardForm.addEventListener('submit', handleCardFormSubmit);
+
+export { profilePicPopupForm }
+
+
+
+
+
+// const myOwnerId  = await getProfileInfo()
+//   .then((profileInfoArr) => {
+//     profileName.textContent = profileInfoArr.name;
+//     profileCalling.textContent = profileInfoArr.about;
+//     profilePic.src = profileInfoArr.avatar;
+//     return profileInfoArr._id;
+//   })
+//   .catch(handleError)
+
 // Добавление карточек
 
 // getInitialCards(myOwnerId)
@@ -83,17 +92,3 @@ profilePicPopupForm.addEventListener('submit', handleProfilePicFormSubmit);
 //     }
 //   })
 //   .catch(handleError);
-
-
-
-profileAddBtn.addEventListener('click', () => {
-  openPopup(cardPopup);
-});
-
-
-popupCardForm.addEventListener('submit', handleCardFormSubmit);
-
-export { profilePicPopupForm }
-
-
-

@@ -2,7 +2,7 @@ import { createCard } from "./card";
 import { validationConfig } from './validate.js';
 import { profileEditBtn, profileName, profileCalling, profilePic, placesList } from './utils';
 import { editProfileInfo, addNewCard, editProfilePic, handleError } from './api'
-import { profilePicPopupForm } from '../index'
+// import { profilePicPopupForm } from '../index'
 
 const profilePopup = document.querySelector('.profile-popup');
 const popupNameInput = document.querySelector('.popup__input_type_name');
@@ -56,6 +56,8 @@ function handleProfileFormSubmit (e) {
 
 
 const profilePicPopupLinkInput = document.querySelector('.profile-pic-popup .popup__input_type_calling');
+const profilePicPopupForm = document.querySelector('.profile-pic-popup .popup__form');
+const profilePicPopupSaveBtn = profilePicPopupForm.querySelector('.popup__save-button');
 
 function handleProfilePicFormSubmit (e) {
   e.preventDefault();
@@ -66,6 +68,8 @@ function handleProfilePicFormSubmit (e) {
       profilePic.src = profilePicAnswer.avatar;
       closePopup(profilePicPopup);
       profilePicPopupForm.reset();
+      profilePicPopupSaveBtn.disabled = true;
+      profilePicPopupSaveBtn.classList.add(validationConfig.disabledButtonClass);
     })
     .catch(handleError)
     .finally (() => {
@@ -110,4 +114,4 @@ function handleCardFormSubmit (e) {
 }
 
 
-export { profilePopup, profilePicPopup, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit, handleProfilePicFormSubmit, renderSaving};
+export { profilePopup, profilePicPopup, profilePicPopupForm, popupNameInput, popupCallingInput, openPopup, closePopup, closePopupByEsc, handleProfileFormSubmit, cardPopup, profileAddBtn, popupCardForm, handleCardFormSubmit, handleProfilePicFormSubmit, renderSaving};

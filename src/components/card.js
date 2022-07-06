@@ -1,6 +1,6 @@
 import { openPopup } from "./modal";
 import { ownerId } from "../index";
-import { deleteCard, likeCardApi, removeLikeCardApi } from './api'
+import { deleteCard, handleError, likeCardApi, removeLikeCardApi } from './api'
 const cards = [];
 
 const cardTemplate = document.querySelector('#place-card').content;
@@ -29,9 +29,7 @@ function createCard(cardItem, ownerId) {
           console.log(deletedCard);
           removeCard(e.target);
         })
-        .catch((err) => {
-          console.log(err);
-        })
+        .catch(handleError);
     })
   } else {
     cardDeleteBtn.remove();
@@ -52,9 +50,7 @@ function createCard(cardItem, ownerId) {
           target.querySelector('.place__like-count').textContent = likedCard.likes.length;
           addLike(placeLikeButton);
         })
-        .catch((err) => {
-          console.log(err);
-        })
+        .catch(handleError);
     } else {
       removeLikeCardApi(target)
         .then((likedCard) => {
@@ -62,9 +58,7 @@ function createCard(cardItem, ownerId) {
           target.querySelector('.place__like-count').textContent = likedCard.likes.length;
           removeLike(placeLikeButton);
         })
-        .catch((err) => {
-          console.log(err);
-        })
+        .catch(handleError);
     }
   })
   placeImage.addEventListener('click', () => {
