@@ -4,9 +4,9 @@
 .header{border-bottom:1px solid rgba(84,84,84,.7);box-sizing:border-box;margin:0 0 40px;min-height:74px}@media screen and (max-width:600px){.header{margin-bottom:42px;min-height:56px}}
 .header__logo{height:33px;width:142px}@media screen and (max-width:1000px){.header__logo{margin-left:27px}}@media screen and (max-width:600px){.header__logo{height:24px;width:104px}}
 .profile{box-sizing:border-box;display:flex;flex-wrap:wrap;margin-bottom:50px;width:100%}@media screen and (max-width:1000px){.profile{padding-left:19px;padding-right:19px}}@media screen and (max-width:600px){.profile{flex-direction:column;flex-wrap:nowrap;margin:0 auto 36px}}
-.profile__pic-container{position:relative}
-.profile__pic-overlay{height:100%;left:0;position:absolute;top:0;width:100%;z-index:2}.profile__pic-overlay:hover{background:rgba(0,0,0,.808) url(8667ac4a523e8fc42e59.svg) no-repeat 50%/26px 26px}
-.profile__pic{border-radius:50%;display:flex;height:120px;-o-object-fit:cover;object-fit:cover;position:relative;width:120px}@media screen and (max-width:600px){.profile__pic{margin:0 auto 26px}}
+.profile__pic-container{align-self:center;display:flex;position:relative}
+.profile__pic-overlay{border-radius:50%;height:120px;-o-object-fit:cover;object-fit:cover;position:absolute;width:120px;z-index:2}.profile__pic-overlay:hover{background:rgba(0,0,0,.808) url(8667ac4a523e8fc42e59.svg) no-repeat 50%/26px 26px}
+.profile__pic{border-radius:50%;height:120px;-o-object-fit:cover;object-fit:cover;position:relative;width:120px}@media screen and (max-width:600px){.profile__pic{margin:0 auto 26px}}
 .profile__info{display:flex;flex-direction:column;justify-content:center;margin:0 auto 0 30px;max-width:350px}@media screen and (max-width:750px){.profile__info{margin-left:auto;width:100%}}@media screen and (max-width:600px){.profile__info{margin-left:auto;max-width:282px}}
 .profile__name-container{display:flex;margin-bottom:16px}@media screen and (max-width:600px){.profile__name-container{margin:0 auto 14px}}
 .profile__name{color:#fff;font-size:42px;font-style:normal;font-weight:500;line-height:48px;margin:0;max-width:294px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:600px){.profile__name{font-size:27px;line-height:33px;max-width:189px}}
